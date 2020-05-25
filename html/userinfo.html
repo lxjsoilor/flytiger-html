@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>统一认证 - 个人中心</title>
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/userinfo.css">
+  <script src="/static/jquery.min.js"></script>
+  <script src="/static/laydate/laydate.js"></script>
+  <script src="/static/layer/layer.js"></script>
+</head>
+
+<body>
+  <div class="hc-user-info">
+    <div class="hc-nav">
+      <div class="hc-nav-tit">
+        虎彩平台 - 个人中心
+      </div>
+    </div>
+    <div class="hc-content">
+      <div class="hc-card">
+        <div class="hc-setting-con">
+          <div class="left-con">
+            <div class="hc-menu">
+              <div class="hc-menu-item hc-active">
+                基本信息
+              </div>
+              <div class="hc-menu-item">
+                安全设置
+              </div>
+            </div>
+          </div>
+          <div class="right-con">
+            <div class="hc-con-item">
+              <h4 class="hc-title">基本信息</h4>
+              <div class="hc-form-item">
+                <div class="hc-item-label">用户名</div>
+                <div class="hc-item-value">
+                  <input type="text" placeholder="请输入" class="form-control">
+                </div>
+              </div>
+              <div class="hc-form-item">
+                <div class="hc-item-label">昵称</div>
+                <div class="hc-item-value">
+                  <input type="text" placeholder="请输入" class="form-control">
+                </div>
+              </div>
+              <div class="hc-form-item">
+                <div class="hc-item-label">性别</div>
+                <div class="hc-item-value">
+                  <label class="checkbox-inline">
+                    <input type="radio" name="is_buy" value="1" checked> 男
+                  </label>
+                  <label class="checkbox-inline">
+                    <input type="radio" name="is_buy" value="0"> 女
+                  </label>
+                </div>
+              </div>
+              <div class="hc-form-item">
+                <div class="hc-item-label">生日</div>
+                <div class="hc-item-value">
+                  <input id="date" type="text" readonly placeholder="请选择" class="form-control">
+                </div>
+              </div>
+              <div class="hc-form-item">
+                <div class="hc-item-label">个人描述</div>
+                <div class="hc-item-value" style="width: 400px;">
+                  <textarea name="" id="" placeholder="请输入" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="hc-con-item" style="display: none;">
+              <h4 class="hc-title">安全设置</h4>
+              <hr />
+              <div class="hc-set-item">
+                <div class="hc-set-tit">登录名</div>
+                <div class="hc-set-sub">当前登录名：admin</div>
+              </div>
+              <hr />
+              <div class="hc-set-item">
+                <div class="hc-set-tit">账号密码</div>
+                <div class="hc-set-sub">
+                  <span id="updatepwd">修改</span>
+                </div>
+              </div>
+              <hr />
+              <div class="hc-set-item">
+                <div class="hc-set-tit">绑定手机</div>
+                <div class="hc-set-sub">
+                  尚未绑定手机
+                  <span id="bindingPhone">绑定</span>
+                </div>
+              </div>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hc-layer-box" id="lay-pwd" style="display: none;">
+      <div class="hc-title">
+        修改密码
+      </div>
+      <div class="hc-layer-item">
+        <label for="">登录密码</label>
+        <div class="hc-layer-content">
+          <input type="password" class="form-control">
+        </div>
+      </div>
+      <div class="hc-layer-item">
+        <label for="">登录密码确认</label>
+        <div class="hc-layer-content">
+          <input type="password" class="form-control">
+        </div>
+      </div>
+      <div class="hc-footer">
+        <button id="cancelButton" class="btn btn-default" type="button">取消</button>
+        <button id="confirmButton" class="btn btn-primary" type="button">确定</button>
+      </div>
+    </div>
+    <div class="hc-layer-box" id="lay-phone" style="display: none;">
+        <div class="hc-title">
+          绑定手机
+        </div>
+        <div class="hc-layer-item">
+          <label for="">手机号</label>
+          <div class="hc-layer-content">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="hc-layer-item">
+          <label for="">手机验证码</label>
+          <div class="hc-layer-content">
+            <input type="text" class="form-control">
+            <button class="btn btn-default">获取验证码</button>
+          </div>
+        </div>
+        <div class="hc-footer">
+          <button id="cancelPhoneButton" class="btn btn-default" type="button">取消</button>
+          <button id="confirmPhoneButton" class="btn btn-primary" type="button">确定</button>
+        </div>
+      </div>
+  </div>
+</body>
+<script>
+  laydate.render({
+    elem: '#date'
+  });
+  $('.hc-menu-item').on('click', function() {
+    $(this).addClass('hc-active').siblings().removeClass('hc-active');
+    var index = $(this).index();
+    $('.hc-con-item').hide().eq(index).show();
+  });
+  var pwdLayer = null;
+  var phoneLayer = null;
+  $('#updatepwd').on('click', function() {
+    pwdLayer = layer.open({
+      type: 1,
+      title: false,
+      shadeClose: true,
+      shade: 0.3,
+      closeBtn: 0,
+      anim: 3,
+      resize:false,
+      isOutAnim: false,
+      offset: 'r',
+      area: ['500px', '100%'],
+      content: $('#lay-pwd')
+    });
+  });
+  $('#cancelButton').on('click', function() {
+    layer.close(pwdLayer);
+  });
+  $('#confirmButton').on('click', function() {
+    layer.close(pwdLayer);
+  });
+  $('#cancelPhoneButton').on('click', function() {
+    layer.close(phoneLayer);
+  });
+  $('#confirmPhoneButton').on('click', function() {
+    layer.close(phoneLayer);
+  });
+  $('#bindingPhone').on('click', function() {
+    phoneLayer = layer.open({
+      type: 1,
+      title: false,
+      shadeClose: true,
+      shade: 0.01,
+      closeBtn: 0,
+      anim: 3,
+      resize:false,
+      isOutAnim: false,
+      offset: 'r',
+      area: ['500px', '100%'],
+      content: $('#lay-phone')
+    });
+  })
+</script>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://192.172.56.152:8211/login -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>统一认证 - 找回密码</title>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/login.css">
+    <link rel="stylesheet" type="text/css" href="/static/animate.css">
+    <link rel="stylesheet" type="text/css" href="/static/toast.css">
+    <script type="text/javascript" charset="utf-8" src="/static/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/toast.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/utils.js"></script>
+</head>
+
+<body>
+    <div class="m-login-bg">
+        <div class="m-login">
+            <div class="m-login-warp">
+                <div class="card">
+                    <div class="hc-switch-tab">
+                        <div class="hc-tab hc-active">
+                            修改密码
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <form id="updatePasswordForm" role="form">
+                            <div class="form-group">
+                                <input type="text" name="mobile" maxlength="11" required="" placeholder="输入手机号" autocomplete="off" class="form-control ">
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-8">
+                                    <input type="text" name="imageCode" required="" placeholder="图片验证码" autocomplete="off" class="form-control ">
+                                </div>
+                                <div class="form-group col-xs-4" style="padding-left: 0px;">
+                                    <div class="hc-image-code">
+                                        <img src="data:image/jpg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAeAGoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAqtf6haaXYy3t7OsNtENzyN0AqyelcV4/8AGS+E7G2YW32ma7mEEcZcKpJHcn/JoA6Sx13StThilsdQtrlJfuGGQNn8qhvfFGh6bq9vpV7qdvb31zGZYopX2llBx1PHXoOpwcZwceY+DdMeLxZqHiKXTo9N8+MRx2cRBUMeWk44BP8AjWT4ql0ceLbjVLxYdQs7iWKy1O0ulDGDH+qkj4yo5PQ87s0Ae33Gq2dtpkmovLvtUQyb4gZNw/2QuS3sB1qto3iTSPEFr9o0y+iuEBKsqnDoR1DKeVPsRXMeI/ENrougpAb8aX56GC3uREGSA44JB+UAe/FcV4HupT411a/1GaAaoYFR47ZNsc654nHJzkYHt096APUtQ8a+HNK1iPSr7VreC9kxiN2+7npuPRc9skZrdV1dQykEHkEV88aleyafqvii3g+zapBqJaS8tbg+XNG2PldM/eTp06HGK9U+GepSX/gTR5ZZC8htxuYnnI4oA7WiiigAooooAKKKKAEbpXIeK9Lg1azktL22juLd+qSLkfX2PvXYVXntklHIoA8r8N+EbjS9RWY63qdxaxKVhtJpAUUH1OMtjtnpTPF3gaw8STRyXCPFcJwJ4+pXOdrD+Ifyr06OwjRsgCnPYROckCgDlLmwE+l/ZpolmjKbWWRdwYY7g9a5Dw94EtNG8QS6jaNMoaMxLCzZWMEg4XvjjpXrv2OPZtwKiTT4lfIAoA8w8U+DrXXFUXERWVf9XPHw6fQ+nt0rrfBGkjRdGttPjLGOBNoLdTXSS2ET9QKmt7ZIRhRQBYHSloooAKKKKAP/2Q=="
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-8">
+                                    <input type="text" name="smsCode" required="" placeholder="短信验证码" autocomplete="off" class="form-control ">
+                                </div>
+                                <div class="form-group col-xs-4" style="padding-left: 0px;">
+                                    <button id="hc-code-btn" class="btn btn-default hc-code-btn" type="button">获取验证码</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" required="" placeholder="密码" autocomplete="off" class="form-control ">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="confirmPassword" required="" placeholder="确认密码" autocomplete="off" class="form-control ">
+                            </div>
+                            <div class="form-group m-login-btn">
+                                <button id="updatePasswordButton" class="btn btn-primary btn-block" type="button">修改密码</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="copyright">
+                        <div class="pull-left">社交账号登录</div>
+                        <div class="pull-right">
+                            <a href="./wxbinding.html">
+                                <svg class="Zi Zi--WeChat Login-socialIcon" fill="#60c84d" viewBox="0 0 24 24" width="20" height="20">
+                                    <path d="M2.224 21.667s4.24-1.825 4.788-2.056C15.029 23.141 22 17.714 22 11.898 22 6.984 17.523 3 12 3S2 6.984 2 11.898c0 1.86.64 3.585 1.737 5.013-.274.833-1.513 4.756-1.513 4.756zm5.943-9.707c.69 0 1.25-.569 1.25-1.271a1.26 1.26 0 0 0-1.25-1.271c-.69 0-1.25.569-1.25 1.27 0 .703.56 1.272 1.25 1.272zm7.583 0c.69 0 1.25-.569 1.25-1.271a1.26 1.26 0 0 0-1.25-1.271c-.69 0-1.25.569-1.25 1.27 0 .703.56 1.272 1.25 1.272z"
+                                        fill-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function handlerGetSmsCode() {
+        var codeButton = $('#hc-code-btn');
+        var count = 60;
+        codeButton.attr('disabled', true);
+        var timer = setInterval(function() {
+            count -= 1;
+            codeButton.html('重新获取（' + count + ')')
+            if(count === 0) {
+                clearInterval(timer);
+                codeButton.attr('disabled', false).html('获取验证码');
+            }
+        }, 1000)
+    }
+    var deviceId = +new Date();
+    // 图片验证码
+    function getCodeImage() {
+        $.ajax({
+            url: 'http://admin.flytiger.io/api/admin/auth/code/image',
+            type: 'post',
+            headers: {
+                deviceId: deviceId
+            },
+            success: function (res) {
+                var result = JSON.parse(res);
+                $('.hc-image-code img').attr('src', 'data:image/jpg;base64,' + result.data);
+            }
+        })
+    };
+    $('.hc-switch-tab').on('click', '.hc-tab', function () {
+        $(this).addClass('hc-active').siblings('.hc-tab').removeClass('hc-active');
+        $('div.card-block').eq($(this).index()).show().siblings('div.card-block').hide();
+    });
+    $('.hc-image-code img').on('click', function() {
+        getCodeImage();
+    })
+    $('#hc-code-btn').on('click', function() {
+        $.ajax({
+            url: 'http://admin.flytiger.io/api/admin/auth/code/sms?mobile=13527783971',
+            type: 'post',
+            headers: {
+                deviceId: deviceId
+            },
+            success: function (res) {
+                console.log(res);
+                var result = JSON.parse(res);
+                if(result.code === 0) {
+                    handlerGetSmsCode();
+                }
+            }
+        })
+    });
+   
+    $('#updatePasswordButton').on('click', function() {
+        var formData = $('#updatePasswordForm').serializeArray();
+        var data = {};
+        $.each(formData, function() {
+            data[this.name] = this.value;
+        });
+        if (!data.mobile) {
+            toast('手机号不能为空');
+        } else if (!validate(data.mobile, 'phone')) {
+            toast('手机号格式不正确');
+        } else if (!data.password) {
+            toast('密码不能为空');
+        } else if (data.password.length < 6) {
+            toast('密码不能小于6位');
+        } else if (!data.confirmPassword) {
+            toast('确认密码不能为空');
+        } else if (!data.imageCode) {
+            toast('图片验证码不能为空');
+        } else if (data.password !== data.confirmPassword) {
+            toast('确认密码和密码不一致');
+        } else if (!data.smsCode) {
+            toast('短信验证码不能为空');
+        } else {
+            $.ajax({
+                url: 'http://admin.flytiger.io/api/base/user/updatePasswordByMobile',
+                data: data,
+                headers: {
+                    sysAppCode: 'APP097655'
+                },
+                success: function(res) {
+                    console.log(res);
+                    toast('注册成功');
+                    setTimeout(function() {
+                        window.location.href = './login.html'
+                    }, 1000)
+                },
+                error: function(res) {
+                    console.log(res);
+                    toast(res.responseJSON.message)
+                }
+            })
+        }
+    })
+
+</script>
+</html>
